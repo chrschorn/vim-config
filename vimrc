@@ -10,9 +10,12 @@
 call plug#begin()
 
 Plug 'rakr/vim-one'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
+if has('python') || has('python3')
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+endif
 
 call plug#end()
 
@@ -110,6 +113,9 @@ set cursorline
 
 " Always show the status line
 set laststatus=2
+
+" Don't just delete the thing instantly when 'c<motion>'
+set cpoptions+=$
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
