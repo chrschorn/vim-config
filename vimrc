@@ -9,13 +9,22 @@
 " Using plug.vim
 call plug#begin()
 
-Plug 'rakr/vim-one'
 Plug 'ctrlpvim/ctrlp.vim'
+if has('gui')
+    Plug 'nathanaelkane/vim-indent-guides'
+endif
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 if has('python') || has('python3')
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 endif
+
+" Colorschemes
+Plug 'rakr/vim-one'
+Plug 'rakr/vim-two-firewatch'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -125,12 +134,8 @@ set cpoptions+=$
 " Enable syntax highlighting
 syntax enable
 
-try
-    colorscheme one
-    "let g:airline_theme='one'
-catch
-    colorscheme desert "fallback
-endtry
+colorscheme one
+let g:airline_theme='one'
 
 set background=dark
 
@@ -183,6 +188,10 @@ set nowrap "Wrap line if longer than window with
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 inoremap jk <Esc>
+
+" Edit vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
