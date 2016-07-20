@@ -126,6 +126,10 @@ set laststatus=2
 " Don't just delete the thing instantly when 'c<motion>'
 set cpoptions+=$
 
+" Better font rendering
+if has('directx')
+    set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors & Fonts
@@ -193,6 +197,12 @@ inoremap jk <Esc>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Turn off highlight search markings
+nmap <silent> <leader>n :nohls<CR>
+
+" Paste from "+ register
+nmap <silent> <leader>pe :normal "+p<CR>
+
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -213,4 +223,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " => airline settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#symbol="\u2021"
+let g:airline#extensions#whitespace#symbol = "\u2021"
+let g:airline#extensions#withespace#enabled = 0
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#tabline#enabled = 1
