@@ -3,17 +3,18 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Detect OS
-let s:is_windows = has("win16") || has("win32")
-let s:is_linux = has("unix")
+let s:is_win = has('win16') || has('win32')
+
+" Save vimfiles path
+let s:vimfiles = s:is_win ? '$HOME/vimfiles' : '$HOME/.vim'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins
+"" Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 " Using plug.vim
-call plug#begin()
+call plug#begin(s:vimfiles.'/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 if has('gui')
@@ -24,7 +25,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 if has('python') || has('python3')
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+    " Might fail to install, visit their README if it does
+    " Use the python launcher on windows
+    Plug 'Valloric/YouCompleteMe', { 'do': (s:is_win ? 'py ' : './') . 'install.py' }
 endif
 
 " Colorschemes
@@ -35,9 +38,8 @@ Plug 'chriskempson/base16-vim'
 call plug#end()
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
+"" General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Sets how many lines of history VIM has to remember
@@ -56,24 +58,19 @@ set encoding=utf-8
 " Allow hiding of modified buffers
 set hidden
 
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-" set scrolloff=7
+" Always keep top/bottom of file x lines away from the cursor 
+set scrolloff=8
 
 " Turn on the Wild menu (suggestions for command line autocomplete)
 set wildmenu
 
 " Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if s:is_windows
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore=*.o,*~,*.pyc,*.git,*.hg,*.svn
 
 " Always show current position
 set ruler
@@ -132,6 +129,25 @@ set cpoptions+=$
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+set autoindent
+set smartindent
+set nowrap "Wrap line if longer than window with
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors & Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -164,34 +180,6 @@ if has("gui_running")
         set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
     endif
 endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-set autoindent
-set smartindent
-set nowrap "Wrap line if longer than window with
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
