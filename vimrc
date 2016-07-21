@@ -2,9 +2,15 @@
 " .vimrc | Christoph Schorn
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Detect OS
+let s:is_windows = has("win16") || has("win32")
+let s:is_linux = has("unix")
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " Using plug.vim
 call plug#begin()
@@ -44,13 +50,8 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
+" Set utf8 as standard encoding
+set encoding=utf-8
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,7 +66,7 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
+if s:is_windows
     set wildignore+=.git\*,.hg\*,.svn\*
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
@@ -126,10 +127,6 @@ set laststatus=2
 " Don't just delete the thing instantly when 'c<motion>'
 set cpoptions+=$
 
-" Better font rendering
-if has('directx')
-    set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors & Fonts
@@ -138,8 +135,13 @@ endif
 " Enable syntax highlighting
 syntax enable
 
-colorscheme one
-let g:airline_theme='one'
+try
+    colorscheme one
+    let g:airline_theme='one'
+catch
+    " Fallback scheme
+    colorscheme desert
+endtry
 
 set background=dark
 
@@ -153,10 +155,12 @@ if has("gui_running")
     set t_Co=256
     set guitablabel=%M\ %t
     set guifont=Source_Code_Pro:h12
-endif
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf-8
+    " Better font rendering
+    if has('directx')
+        set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+    endif
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,7 +195,16 @@ set nowrap "Wrap line if longer than window with
 " => Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Use jk to exit insert mode 
 inoremap jk <Esc>
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w<cr>
 
 " Edit vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -199,6 +212,10 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Turn off highlight search markings
 nmap <silent> <leader>n :nohls<CR>
+
+" Go to current file's directory
+nmap <silent> <leader>cd :cd %:p:h<CR>
+nmap <silent> <leader>cdw :lcd %:p:h<CR> "Only for current window
 
 " Paste from "+ register
 nmap <silent> <leader>pe :normal "+p<CR>
@@ -213,17 +230,30 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 map <C-n> :NERDTreeToggle<CR>
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+if has("gui_running")
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => airline settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#symbol = "\u2021"
-let g:airline#extensions#withespace#enabled = 0
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#tabline#enabled = 1
+if has("gui_running")
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#whitespace#symbol = "\u2021"
+endif
+
+let g:airline#extensions#whitespace#enabled = 0 "Disable whitespace extension
+let g:airline_skip_empty_sections = 1 "Do not draw separators for empty sections (only for the active window)
+let g:airline#extensions#tabline#enabled = 1 "Shows a tab view 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ctrlp settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_reuse_window = 'startify' "Allow to use the empty window when starting gvim without a file
