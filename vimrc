@@ -53,6 +53,9 @@ set autoread
 " Set utf8 as standard encoding
 set encoding=utf-8
 
+" Allow hiding of modified buffers
+set hidden
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
