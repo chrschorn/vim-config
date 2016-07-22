@@ -5,6 +5,17 @@
 " Detect OS
 let s:is_win = has('win16') || has('win32')
 
+" Start maximized
+if has("gui_running")
+    " GUI is running or is about to start.
+    if s:is_win
+        " Use ~x on an English Windows version or ~n for French.
+        au GUIEnter * simalt ~x
+    else
+        set lines=999 columns=999
+    endif
+endif
+  
 " Save vimfiles path
 let s:vimfiles = s:is_win ? '$HOME/vimfiles' : '$HOME/.vim'
 
@@ -17,6 +28,7 @@ let s:vimfiles = s:is_win ? '$HOME/vimfiles' : '$HOME/.vim'
 call plug#begin(s:vimfiles.'/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'gabrielelana/vim-markdown'
 if has('gui')
     Plug 'nathanaelkane/vim-indent-guides'
 endif
