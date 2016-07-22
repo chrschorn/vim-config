@@ -29,6 +29,7 @@ call plug#begin(s:vimfiles.'/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabrielelana/vim-markdown'
+"Plug 'mitsuhiko/vim-python-combined'
 if has('gui')
     Plug 'nathanaelkane/vim-indent-guides'
 endif
@@ -36,16 +37,23 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 if has('python') || has('python3')
     " Might fail to install, visit their README if it does
     " Use the python launcher on windows
     Plug 'Valloric/YouCompleteMe', { 'do': (s:is_win ? 'py ' : './') . 'install.py' }
 endif
 
-" Colorschemes
+" I like colorschemes
 Plug 'rakr/vim-one'
-Plug 'rakr/vim-two-firewatch'
-Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'
+Plug 'tomasr/molokai'
+Plug 'djjcast/mirodark'
+Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'reedes/vim-colors-pencil'
 
 call plug#end()
 
@@ -126,6 +134,7 @@ set foldcolumn=0
 
 " Show line numbers
 set number
+set relativenumber
 
 " show command in bottom bar
 set showcmd
@@ -141,7 +150,7 @@ set cpoptions+=$
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
+"" Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use spaces instead of tabs
@@ -160,15 +169,15 @@ set nowrap "Wrap line if longer than window with
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors & Fonts
+"" Colors & Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable syntax highlighting
 syntax enable
 
 try
-    colorscheme one
-    let g:airline_theme='one'
+    colorscheme hybrid 
+    let g:airline_theme='hybrid'
 catch
     " Fallback scheme
     colorscheme desert
@@ -185,7 +194,7 @@ if has("gui_running")
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Source_Code_Pro:h12
+    set guifont=Source_Code_Pro:h11
 
     " Better font rendering
     if has('directx')
@@ -195,7 +204,7 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Key mappings
+"" Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use jk to exit insert mode 
@@ -235,7 +244,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NERDTree settings
+"" NERDTree settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
     let g:NERDTreeDirArrowExpandable = '▸'
@@ -244,7 +253,7 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => airline settings
+"" airline settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
     let g:airline_powerline_fonts = 1
@@ -257,6 +266,6 @@ let g:airline#extensions#tabline#enabled = 1 "Shows a tab view
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ctrlp settings
+"" ctrlp settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_reuse_window = 'startify' "Allow to use the empty window when starting gvim without a file
