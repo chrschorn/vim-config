@@ -15,7 +15,7 @@ if has("gui_running")
         set lines=999 columns=999
     endif
 endif
-  
+
 " Save vimfiles path
 let s:vimfiles = s:is_win ? '$HOME/vimfiles' : '$HOME/.vim'
 
@@ -31,9 +31,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabrielelana/vim-markdown'
 "Plug 'mitsuhiko/vim-python-combined'
 if has('gui')
-    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'Yggdroot/indentLine'
 endif
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -45,15 +47,19 @@ if has('python') || has('python3')
 endif
 
 " I like colorschemes
+Plug 'jordwalke/flatlandia'
+Plug 'reedes/vim-colors-pencil'
+Plug 'zsoltf/vim-maui'
 Plug 'rakr/vim-one'
 Plug 'altercation/vim-colors-solarized'
 Plug 'w0ng/vim-hybrid'
 Plug 'tomasr/molokai'
-Plug 'djjcast/mirodark'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'reedes/vim-colors-pencil'
+Plug 'notpratheek/vim-luna'
+Plug 'mhartington/oceanic-next'
+Plug 'limadm/vim-blues'
+Plug 'sjl/badwolf'
 
 call plug#end()
 
@@ -163,9 +169,16 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
+" Smart indents on new line
 set autoindent
 set smartindent
-set nowrap "Wrap line if longer than window with
+
+" Wrap line if longer than window with
+set nowrap
+
+" Show whitespace
+set list
+set listchars=trail:·
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,26 +188,26 @@ set nowrap "Wrap line if longer than window with
 " Enable syntax highlighting
 syntax enable
 
-try
-    colorscheme hybrid 
-    let g:airline_theme='hybrid'
-catch
-    " Fallback scheme
-    colorscheme desert
-endtry
+" Set colorscheme
+if has('gui_running')
+    colorscheme flatlandia
+    let g:airline_theme='flatlandia'
+else
+    colorscheme slate "Fallback scheme
+endif
 
 set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T "remove toolbar
-    " set guioptions-=e
+    " set guioptions-=e "remove tab pages
     set guioptions-=m "remove menu bar
     set guioptions-=r "remove right-hand scroll bar
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Source_Code_Pro:h11
+    set guifont=Hack:h11
 
     " Better font rendering
     if has('directx')
@@ -207,8 +220,9 @@ endif
 "" Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Use jk to exit insert mode 
+" Use jk/kj to exit insert mode, use it like a single keystroke!
 inoremap jk <Esc>
+inoremap kj <ESC>
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -229,8 +243,11 @@ nmap <silent> <leader>n :nohls<CR>
 nmap <silent> <leader>cd :cd %:p:h<CR>
 nmap <silent> <leader>cdw :lcd %:p:h<CR> "Only for current window
 
-" Paste from "+ register
+" Paste from "+ register (copy from external windows)
 nmap <silent> <leader>pe :normal "+p<CR>
+
+" Toggle indent lines
+nmap <silent> <leader>il :IndentLinesToggle<CR>
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
@@ -241,6 +258,8 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
+" Toggle Gundo tree
+nnoremap <F5> :GundoToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -257,15 +276,27 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
     let g:airline_powerline_fonts = 1
-    let g:airline#extensions#whitespace#symbol = "\u2021"
+    "let g:airline#extensions#whitespace#symbol = "\u2021" "Default symbol (12 pointed star) might not be available
 endif
 
 let g:airline#extensions#whitespace#enabled = 0 "Disable whitespace extension
 let g:airline_skip_empty_sections = 1 "Do not draw separators for empty sections (only for the active window)
-let g:airline#extensions#tabline#enabled = 1 "Shows a tab view 
+let g:airline#extensions#tabline#enabled = 1 "Shows a tab view
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" ctrlp settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_reuse_window = 'startify' "Allow to use the empty window when starting gvim without a file
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" indent guides settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_char = '┊'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Gundo settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gundo_prefer_python3 = 1 "Gundo tries to use Python 2.4+ *really* hard
