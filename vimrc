@@ -210,8 +210,8 @@ if has("gui_running")
     set guifont=Hack:h11
 
     " Better font rendering
-    if has('directx')
-        set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+    if has('directx') && s:is_win
+        set renderoptions=type:directx,gamma:1.2,contrast:1,level:0.75,geom:1,renmode:5,taamode:1
     endif
 endif
 
