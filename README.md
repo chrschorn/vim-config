@@ -12,11 +12,16 @@ I'm learning vim :)
     - Linux: `ln ~/.vim/vimrc ~/.vimrc`
 * Start (g)vim and run `:PlugInstall`
 
+### Font
+
+Install `Hack` from [https://github.com/chrissimpkins/Hack](https://github.com/chrissimpkins/Hack). It comes with Powerline characters!
+
+
 ## Notes
 
-Use a Vim with Python 3.5 support (and other languages): [bintray.com](https://bintray.com/micbou/generic/vim)
+Download a Vim with Python 3.5 support (and other languages): [https://bintray.com/micbou/generic/vim](https://bintray.com/micbou/generic/vim)
 
-### YouCompleteMe
-* Run `python install.py` after plugin installation
+### Plugin YouCompleteMe
+* Run `python install.py` inside `.vim/<pluginfolder>/YouCompleteMe/` after plugin installation if automatic install fails
 * Make sure vim platform matches python2/3 platform! 32/64bit
 * Python 2 build *has* to be >=2.7.12
