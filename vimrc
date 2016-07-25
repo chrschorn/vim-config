@@ -124,7 +124,7 @@ set incsearch
 set lazyredraw
 
 " For regular expressions turn magic on
-" set magic
+set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -154,6 +154,12 @@ set laststatus=2
 " Don't just delete the thing instantly when 'c<motion>'
 set cpoptions+=$
 
+" Make clipboard behave like a normal program
+set clipboard=unnamed
+
+" Show a highlighted column
+set colorcolumn=80
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Text, tab and indent related
@@ -178,7 +184,7 @@ set nowrap
 
 " Show whitespace
 set list
-set listchars=trail:·
+set listchars=tab:\ \ ,trail:·
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,8 +196,8 @@ syntax enable
 
 " Set colorscheme
 if has('gui_running')
-    colorscheme flatlandia
-    let g:airline_theme='flatlandia'
+    colorscheme gruvbox
+    let g:airline_theme='gruvbox'
 else
     colorscheme slate "Fallback scheme
 endif
@@ -207,7 +213,7 @@ if has("gui_running")
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Hack:h11
+    set guifont=Hack:h10
 
     " Better font rendering
     if has('directx') && s:is_win
