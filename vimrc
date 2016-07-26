@@ -30,7 +30,7 @@ call plug#begin(s:vimfiles.'/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabrielelana/vim-markdown'
 "Plug 'mitsuhiko/vim-python-combined'
-if has('gui')
+if has('gui_running')
     Plug 'Yggdroot/indentLine'
 endif
 Plug 'scrooloose/nerdtree'
@@ -47,19 +47,20 @@ if has('python') || has('python3')
 endif
 
 " I like colorschemes
-Plug 'jordwalke/flatlandia'
-Plug 'reedes/vim-colors-pencil'
-Plug 'zsoltf/vim-maui'
-Plug 'rakr/vim-one'
-Plug 'altercation/vim-colors-solarized'
-Plug 'w0ng/vim-hybrid'
-Plug 'tomasr/molokai'
-Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
+Plug 'w0ng/vim-hybrid'
+Plug 'zsoltf/vim-maui'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'reedes/vim-colors-pencil'
+Plug 'rakr/vim-one'
+Plug 'jordwalke/flatlandia'
+Plug 'nanotech/jellybeans.vim'
 Plug 'notpratheek/vim-luna'
 Plug 'mhartington/oceanic-next'
 Plug 'limadm/vim-blues'
 Plug 'sjl/badwolf'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -196,10 +197,12 @@ syntax enable
 
 " Set colorscheme
 if has('gui_running')
+    let g:gruvbox_contrast_dark = 'medium'
+    let g:gruvbox_contrast_light = 'medium'
     colorscheme gruvbox
     let g:airline_theme='gruvbox'
 else
-    colorscheme slate "Fallback scheme
+    colorscheme slate
 endif
 
 set background=dark
