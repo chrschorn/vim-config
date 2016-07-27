@@ -161,6 +161,10 @@ set clipboard=unnamed
 " Show a highlighted column
 set colorcolumn=80
 
+" Add spellfiles
+set spell
+set spelllang=en,de
+execute ':set spellfile=' . s:vimfiles . '/spell/words.utf-8.add'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Text, tab and indent related
