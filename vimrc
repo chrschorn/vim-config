@@ -45,6 +45,7 @@ if has('python') || has('python3')
     " Use the python launcher on windows
     Plug 'Valloric/YouCompleteMe', { 'do': (s:is_win ? 'py ' : './') . 'install.py' }
 endif
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 
 " I like colorschemes
 Plug 'morhetz/gruvbox'
@@ -61,6 +62,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'limadm/vim-blues'
 Plug 'sjl/badwolf'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -201,7 +203,7 @@ syntax enable
 
 " Set colorscheme
 if has('gui_running')
-    let g:gruvbox_contrast_dark = 'medium'
+    let g:gruvbox_contrast_dark = 'hard'
     let g:gruvbox_contrast_light = 'medium'
     colorscheme gruvbox
     let g:airline_theme='gruvbox'
