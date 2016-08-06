@@ -313,3 +313,12 @@ let g:indentLine_char = '┊'
 "" Gundo settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gundo_prefer_python3 = 1 "Gundo tries to use Python 2.4+ *really* hard
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Local system overwrites
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:localvimrc = $HOME . "/" . (s:is_win ? "_" : ".") . "vimrc.local"
+if filereadable(s:localvimrc)
+    execute "source " . s:localvimrc
+endif
