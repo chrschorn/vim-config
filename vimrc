@@ -184,8 +184,8 @@ set tabstop=4
 set autoindent
 set smartindent
 
-" Wrap line if longer than window with
-set nowrap
+" Wrap line if longer than window with, and only break whole words
+set wrap linebreak nolist
 
 " Show whitespace
 set list
