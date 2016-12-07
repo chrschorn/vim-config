@@ -19,6 +19,8 @@ endif
 " Save vimfiles path
 let s:vimfiles = s:is_win ? '$HOME/vimfiles' : '$HOME/.vim'
 
+" Local vimrc path
+let s:localvimrc = $HOME . "/" . (s:is_win ? "_" : ".") . "vimrc.local"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Plugins
@@ -251,6 +253,9 @@ nmap <leader>w :w<cr>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+execute "nmap <silent> <leader>lev :e " . s:localvimrc . "<CR>"
+execute "nmap <silent> <leader>sev :so" . s:localvimrc . "<CR>"
+
 " Turn off highlight search markings
 nmap <silent> <leader>n :nohls<CR>
 
@@ -320,7 +325,6 @@ let g:gundo_prefer_python3 = 1 "Gundo tries to use Python 2.4+ *really* hard
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Local system overwrites
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:localvimrc = $HOME . "/" . (s:is_win ? "_" : ".") . "vimrc.local"
 if filereadable(s:localvimrc)
     execute "source " . s:localvimrc
 endif
