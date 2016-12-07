@@ -254,7 +254,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 execute "nmap <silent> <leader>lev :e " . s:localvimrc . "<CR>"
-execute "nmap <silent> <leader>sev :so" . s:localvimrc . "<CR>"
+execute "nmap <silent> <leader>lsv :so " . s:localvimrc . "<CR>"
 
 " Turn off highlight search markings
 nmap <silent> <leader>n :nohls<CR>
