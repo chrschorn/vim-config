@@ -42,29 +42,31 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ajh17/VimCompletesMe'
 if has('python') || has('python3')
     " Might fail to install, visit their README if it does
     " Use the python launcher on windows
-    Plug 'Valloric/YouCompleteMe', { 'do': (s:is_win ? 'py ' : './') . 'install.py' }
+    " Kind of a heavy plugin, but very IDE-like completion
+    " Plug 'Valloric/YouCompleteMe', { 'do': (s:is_win ? 'py ' : './') . 'install.py' }
 endif
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 
 " I like colorschemes
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
-Plug 'zsoltf/vim-maui'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
-Plug 'reedes/vim-colors-pencil'
-Plug 'rakr/vim-one'
 Plug 'jordwalke/flatlandia'
-Plug 'nanotech/jellybeans.vim'
-Plug 'notpratheek/vim-luna'
-Plug 'mhartington/oceanic-next'
-Plug 'limadm/vim-blues'
 Plug 'sjl/badwolf'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
+Plug 'rakr/vim-one'
+"Plug 'zsoltf/vim-maui'
+"Plug 'reedes/vim-colors-pencil'
+"Plug 'nanotech/jellybeans.vim'
+"Plug 'notpratheek/vim-luna'
+"Plug 'mhartington/oceanic-next'
+"Plug 'limadm/vim-blues'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -207,7 +209,7 @@ syntax enable
 if has('gui_running')
     let g:gruvbox_contrast_dark = 'hard'
     let g:gruvbox_contrast_light = 'medium'
-    colorscheme gruvbox
+    colorscheme hybrid
     let g:airline_theme='gruvbox'
 else
     colorscheme slate
