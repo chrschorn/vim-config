@@ -1,0 +1,25 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Key mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use jk/kj to exit insert mode, use it like a single keystroke!
+inoremap jk <Esc>
+inoremap kj <ESC>
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w<cr>
+
+" Edit vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+execute "nmap <silent> <leader>elv :e " . s:localvimrc . "<CR>"
+execute "nmap <silent> <leader>slv :so " . s:localvimrc . "<CR>"
+
+" Turn off highlight search markings
+nmap <silent> <leader>n :nohls<CR>
