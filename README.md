@@ -4,13 +4,16 @@ I'm learning vim :)
 
 ## Setup
 
-* Clone this repository
-    - Windows: `git clone https://github.com/chrschorn/vim-config.git %USERPROFILE%\vimfiles`
-    - Linux: `git clone https://github.com/chrschorn/vim-config.git ~/.vim`
-* Link the `.vimrc`
-    - Windows: `mklink %USERPROFILE%\_vimrc %USERPROFILE%\vimfiles\vimrc`
-    - Linux: `ln ~/.vim/vimrc ~/.vimrc`
+* Clone this repository and link the vimrc (see below)
 * Start (g)vim and run `:PlugInstall`
+
+```
+// Windows
+git clone https://github.com/chrschorn/vim-config.git %USERPROFILE%\vimfiles && mklink /H %USERPROFILE%\_vimrc %USERPROFILE%\vimfiles\vimrc
+
+// Linux
+git clone https://github.com/chrschorn/vim-config.git ~/.vim && ln ~/.vim/vimrc ~/.vimrc
+```
 
 ### Font
 
