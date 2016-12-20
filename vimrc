@@ -226,7 +226,7 @@ if has("gui_running")
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Hack:h10
+    set guifont=Hack:h11
 
     " Better font rendering
     if has('directx') && s:is_win
