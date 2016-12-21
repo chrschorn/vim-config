@@ -1,4 +1,79 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Always keep top/bottom of file x lines away from the cursor 
+set scrolloff=8
+
+" Turn on the Wild menu (suggestions for command line autocomplete)
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*.git,*.hg,*.svn
+
+" Always show current position
+set ruler
+
+" Height of the command bar
+set cmdheight=2
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When 'ignorecase' and 'smartcase' are both on, if a pattern contains an uppercase letter, it is case sensitive
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" Add extra margin to the left
+set foldcolumn=0
+
+" Show line numbers
+set number
+set relativenumber
+
+" show command in bottom bar
+set showcmd
+
+" highlight current line
+set cursorline
+
+" Always show the status line
+set laststatus=2
+
+" Don't just delete the thing instantly when 'c<motion>'
+set cpoptions+=$
+
+" Make clipboard behave like a normal program
+set clipboard=unnamed
+
+" Show a highlighted column
+set colorcolumn=80
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
