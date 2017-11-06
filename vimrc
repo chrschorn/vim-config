@@ -226,7 +226,7 @@ if has("gui_running")
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Hack:h11
+    set guifont=Hack:h11,Consolas:h11
 
     " Better font rendering
     if has('directx') && s:is_win
@@ -276,6 +276,12 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Move between windows easier
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
