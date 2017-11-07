@@ -31,7 +31,7 @@ call plug#begin(s:vimfiles.'/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gabrielelana/vim-markdown'
-"Plug 'mitsuhiko/vim-python-combined'
+Plug 'mitsuhiko/vim-python-combined'
 if has('gui_running')
     Plug 'Yggdroot/indentLine'
 endif
@@ -166,6 +166,9 @@ set clipboard=unnamed
 
 " Show a highlighted column
 set colorcolumn=80
+
+" Don't hide quotation marks (e.g. in json files)
+set conceallevel=0
 
 " Add spellfiles
 set spell
