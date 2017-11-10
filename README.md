@@ -1,28 +1,27 @@
 # vim-config
 
-I'm learning vim :)
+My Vim configuration.
 
 ## Setup
 
-* Clone this repository and link the vimrc (see below)
-* Start (g)vim and run `:PlugInstall`
+* Run the command below, depending on the OS. It clones this repository, links the vimrc to its corresponding location and installs the plugins.
 
 ```
 // Windows
-git clone https://github.com/chrschorn/vim-config.git %USERPROFILE%\vimfiles && mklink /H %USERPROFILE%\_vimrc %USERPROFILE%\vimfiles\vimrc
+git clone https://github.com/chrschorn/vim-config.git %USERPROFILE%\vimfiles && mklink /H %USERPROFILE%\_vimrc %USERPROFILE%\vimfiles\vimrc && vim -c ":PlugInstall"
 
 // Linux
-git clone https://github.com/chrschorn/vim-config.git ~/.vim && ln ~/.vim/vimrc ~/.vimrc
+git clone https://github.com/chrschorn/vim-config.git ~/.vim && ln ~/.vim/vimrc ~/.vimrc && vim -c ":PlugInstall"
 ```
 
-### Font
+## Font
 
-Install `Hack` from [https://github.com/chrissimpkins/Hack](https://github.com/chrissimpkins/Hack). It comes with Powerline characters!
+Install **Hack** from  [github.com/source-foundry/Hack](https://github.com/source-foundry/Hack/releases). It comes with Powerline characters that can be used in the airline plugin.
 
 
 ## Notes
 
-Download a Vim with Python 3.5 support (and other languages): [https://bintray.com/micbou/generic/vim](https://bintray.com/micbou/generic/vim)
+Download a Vim with Python 3.x (and other languages) support: [https://bintray.com/micbou/generic/vim](https://bintray.com/micbou/generic/vim)
 
 ### Plugin YouCompleteMe
 * Run `python install.py` inside `.vim/<pluginfolder>/YouCompleteMe/` after plugin installation if automatic install fails
