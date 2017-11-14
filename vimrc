@@ -5,8 +5,11 @@
 " Detect OS
 let s:is_win = has('win16') || has('win32')
 
+" GUI running
+let s:gui = has('gui_running')
+
 " Start maximized
-if has("gui_running")
+if s:gui
     " GUI is running or is about to start.
     if s:is_win
         " Use ~x on an English Windows version or ~n for French.
@@ -29,20 +32,21 @@ let s:localvimrc = $HOME . "/" . (s:is_win ? "_" : ".") . "vimrc.local"
 " Using plug.vim
 call plug#begin(s:vimfiles.'/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file opening
 Plug 'gabrielelana/vim-markdown'
-Plug 'mitsuhiko/vim-python-combined'
-if has('gui_running')
-    Plug 'Yggdroot/indentLine'
+if s:gui
+    Plug 'Yggdroot/indentLine'  " show indent line
 endif
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'  " folder view
+Plug 'scrooloose/syntastic'  " syntax checking
+Plug 'sjl/gundo.vim'  " change history tracking
+Plug 'tpope/vim-fugitive'  " git in vim
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ajh17/VimCompletesMe'
+Plug 'vim-python/python-syntax'  " advanced python highlighting
+Plug 'ajh17/VimCompletesMe'  " auto complete with tab key
+Plug 'vim-scripts/AutoComplPop'  " opens completion popup while typing
 if has('python') || has('python3')
     " Might fail to install, visit their README if it does
     " Use the python launcher on windows
@@ -51,22 +55,28 @@ if has('python') || has('python3')
 endif
 
 " I like colorschemes
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
-Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
 Plug 'jordwalke/flatlandia'
 Plug 'sjl/badwolf'
 Plug 'rakr/vim-one'
+Plug 'jnurmine/Zenburn'
+Plug 'notpratheek/vim-luna'
+"Plug 'vim-scripts/SlateDark'
+"Plug 'miyakogi/slateblue.vim'
+"Plug 'cocopon/iceberg.vim'
+"Plug 'nightsense/vimspectr'
+"Plug 'Badacadabra/vim-archery'
 "Plug 'zsoltf/vim-maui'
 "Plug 'reedes/vim-colors-pencil'
 "Plug 'nanotech/jellybeans.vim'
-"Plug 'notpratheek/vim-luna'
 "Plug 'mhartington/oceanic-next'
 "Plug 'limadm/vim-blues'
 "Plug 'NLKNguyen/papercolor-theme'
 "Plug 'chriskempson/base16-vim'
+"Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 
 call plug#end()
 
@@ -147,13 +157,15 @@ set foldcolumn=0
 
 " Show line numbers
 set number
-set relativenumber
+"set relativenumber
 
 " show command in bottom bar
 set showcmd
 
 " highlight current line
-set cursorline
+if s:gui
+    set cursorline
+endif
 
 " Always show the status line
 set laststatus=2
@@ -165,13 +177,17 @@ set cpoptions+=$
 set clipboard=unnamed
 
 " Show a highlighted column
-set colorcolumn=80
+if s:gui
+    set colorcolumn=80
+endif
 
 " Don't hide quotation marks (e.g. in json files)
 set conceallevel=0
 
 " Add spellfiles
-set spell
+if s:gui
+    set spell
+endif
 set spelllang=en,de
 execute ':set spellfile=' . s:vimfiles . '/spell/words.utf-8.add'
 
@@ -209,19 +225,20 @@ set listchars=tab:\ \ ,trail:·
 syntax enable
 
 " Set colorscheme
-if has('gui_running')
-    let g:gruvbox_contrast_dark = 'hard'
-    let g:gruvbox_contrast_light = 'medium'
-    colorscheme hybrid
-    let g:airline_theme='gruvbox'
+if s:gui
+    set background=dark
+    colorscheme solarized
+    let g:airline_theme='solarized'
 else
-    colorscheme slate
+    set background=dark
+    let g:solarized_termtrans=1
+    colorscheme solarized
+    let g:airline_theme='base16'
 endif
 
-set background=dark
 
 " Set extra options when running in GUI mode
-if has("gui_running")
+if s:gui
     set guioptions-=T "remove toolbar
     " set guioptions-=e "remove tab pages
     set guioptions-=m "remove menu bar
@@ -296,7 +313,7 @@ nnoremap <F5> :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" NERDTree settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
+if s:gui
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
 endif
@@ -305,7 +322,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" airline settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
+if s:gui
     let g:airline_powerline_fonts = 1
     "let g:airline#extensions#whitespace#symbol = "\u2021" "Default symbol (12 pointed star) might not be available
 endif
@@ -313,6 +330,12 @@ endif
 let g:airline#extensions#whitespace#enabled = 0 "Disable whitespace extension
 let g:airline_skip_empty_sections = 1 "Do not draw separators for empty sections (only for the active window)
 let g:airline#extensions#tabline#enabled = 1 "Shows a tab view
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" VimCompletesMe settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:vcm_tab_complete = ''
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -331,6 +354,18 @@ let g:indentLine_char = '┊'
 "" Gundo settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gundo_prefer_python3 = 1 "Gundo tries to use Python 2.4+ *really* hard
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Python syntax highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:python_highlight_all = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Set syntastic to passive mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
