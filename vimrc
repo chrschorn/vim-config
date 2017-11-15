@@ -229,11 +229,12 @@ if s:gui
     set background=dark
     colorscheme solarized
     let g:airline_theme='solarized'
+    call togglebg#map("<F9>")
 else
     set background=dark
     let g:solarized_termtrans=1
     colorscheme solarized
-    let g:airline_theme='base16'
+    let g:airline_theme='dark'
 endif
 
 
@@ -246,7 +247,7 @@ if s:gui
     set guioptions-=L "remove left-hand scroll bar
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Hack:h11,Consolas:h11
+    set guifont=Hack:h10,Consolas:h11
 
     " Better font rendering
     if has('directx') && s:is_win
