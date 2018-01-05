@@ -224,22 +224,15 @@ set listchars=tab:\ \ ,trail:·
 " Enable syntax highlighting
 syntax enable
 
-" Set colorscheme
+" Set gui/non-gui options
 if s:gui
+    " colorscheme
     set background=dark
     colorscheme solarized
     let g:airline_theme='solarized'
     call togglebg#map("<F9>")
-else
-    set background=dark
-    let g:solarized_termtrans=1
-    colorscheme solarized
-    let g:airline_theme='dark'
-endif
 
-
-" Set extra options when running in GUI mode
-if s:gui
+    " gui options
     set guioptions-=T "remove toolbar
     " set guioptions-=e "remove tab pages
     set guioptions-=m "remove menu bar
@@ -253,6 +246,16 @@ if s:gui
     if has('directx') && s:is_win
         set renderoptions=type:directx,gamma:1.2,contrast:1,level:0.75,geom:1,renmode:5,taamode:1
     endif
+else  " no gui
+    set background=dark
+    colorscheme default
+    let g:solarized_termtrans=1
+    let g:airline_theme='dark'
+
+    "set term=xterm
+    "set t_Co=88
+    "let &t_AB="\e[48;5;%dm"
+    "let &t_AF="\e[38;5;%dm"
 endif
 
 
