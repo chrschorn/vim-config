@@ -138,7 +138,7 @@ set hlsearch
 set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw
+"set lazyredraw  " might cause vim to exit with non-zero codes
 
 " For regular expressions turn magic on
 set magic
