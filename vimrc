@@ -228,7 +228,7 @@ syntax enable
 if s:gui
     " colorscheme
     set background=dark
-    !silent colorscheme solarized
+    silent! colorscheme solarized
     let g:airline_theme='solarized'
     call togglebg#map("<F9>")
 
@@ -248,7 +248,7 @@ if s:gui
     endif
 else  " no gui
     set background=dark
-    !silent colorscheme default
+    silent! colorscheme default
     let g:solarized_termtrans=1
     let g:airline_theme='dark'
 
