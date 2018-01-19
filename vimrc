@@ -47,6 +47,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-python/python-syntax'  " advanced python highlighting
 Plug 'ajh17/VimCompletesMe'  " auto complete with tab key
 Plug 'vim-scripts/AutoComplPop'  " opens completion popup while typing
+Plug 'qpkorr/vim-bufkill'  " allows to close buffer without closing window/split
 if has('python') || has('python3')
     " Might fail to install, visit their README if it does
     " Use the python launcher on windows
@@ -295,6 +296,9 @@ nmap <silent> <leader>pe :normal "+p<CR>
 " Toggle indent lines
 nmap <silent> <leader>il :IndentLinesToggle<CR>
 
+" Close buffer but not split/window
+nmap <leader>bd :BD<CR>
+
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -313,6 +317,12 @@ map <C-n> :NERDTreeToggle<CR>
 " Toggle Gundo tree
 nnoremap <F5> :GundoToggle<CR>
 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Filetype specific settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd Filetype yaml setlocal nospell autoindent sw=2 ts=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" NERDTree settings
