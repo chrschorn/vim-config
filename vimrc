@@ -45,7 +45,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-python/python-syntax'  " advanced python highlighting
-Plug 'ajh17/VimCompletesMe'  " auto complete with tab key
+"Plug 'ajh17/VimCompletesMe'
 Plug 'vim-scripts/AutoComplPop'  " opens completion popup while typing
 Plug 'qpkorr/vim-bufkill'  " allows to close buffer without closing window/split
 if has('python') || has('python3')
@@ -107,7 +107,7 @@ set nobackup
 set nowb
 set noswapfile
 
-" Always keep top/bottom of file x lines away from the cursor 
+" Always keep top/bottom of file x lines away from the cursor
 set scrolloff=8
 
 " Turn on the Wild menu (suggestions for command line autocomplete)
